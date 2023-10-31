@@ -3,6 +3,7 @@ import reactLogo from "./assets/react.svg";
 import { Button, ButtonGroup, Grid, Show } from "@chakra-ui/react";
 import { GridItem } from "@chakra-ui/react";
 import "./App.css";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
         lg: `"nav nav" 'aside main'`,
       }}
     >
-      <GridItem area="nav" bg="coral">
-        Nav
+      <GridItem area="nav" >
+        <Navbar/>
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" bg="gold">
