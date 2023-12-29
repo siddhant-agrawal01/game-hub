@@ -1,4 +1,4 @@
-import { CanceledError } from "axios";
+import { AxiosRequestConfig, CanceledError } from "axios";
 import { useState, useEffect } from "react";
 import apiClient from "../services/api-client";
 
@@ -10,7 +10,7 @@ interface FetchResponse<T> {
 }
 
 
-  const useData = <T>(endpoint:string) => {
+  const useData = <T>(endpoint:string , requestConfig?: AxiosRequestConfig, deps?:any[]) => {
     const [data, setData] = useState<T[]>([]);
     const [error, setError] = useState("");
     const [isLoading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ interface FetchResponse<T> {
       const controller = new AbortController();
       setLoading(true);
       apiClient
-        .get<FetchResponse<T>>(endpoint, { signal: controller.signal })
+        .get<FetchResponse<T>>(endpoint, { signal: controller.signal, ...requestConfig })
         .then((res) => {
           setData(res.data.results);
           setLoading(false);
@@ -32,7 +32,7 @@ interface FetchResponse<T> {
         });
 
       return () => controller.abort(); // calling the cleanup fn
-    }, []); // an array dependencies,without this bcoz sending a req to our backend,something that we never want to happen
+    }, deps? [...deps] : []); // an array dependencies,without this bcoz sending a req to our backend,something that we never want to happen
 
     return {
       data,
