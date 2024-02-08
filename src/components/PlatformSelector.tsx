@@ -8,6 +8,8 @@ import { Platform } from "../hooks/useGames";
 interface Props {
   onSelectPlatform: (platform: Platform) => void;
   selectedPlatform: Platform | null;
+    // selectedGenre:string;
+
 }
 const PlatformSelector = ({onSelectPlatform,selectedPlatform}: Props) => {
   const { data, error } = usePlatforms();

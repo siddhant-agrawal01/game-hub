@@ -7,6 +7,7 @@ import { Button } from "@chakra-ui/react"; // Import the Button component
 
 interface Props {
   onSelectGenre: (genre: Genre) => void;
+  // selectedGenre:string;
 }
 
 const GenreList = ({ onSelectGenre }: Props) => {
